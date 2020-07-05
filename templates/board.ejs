@@ -63,13 +63,20 @@ adc.prefilter.enable = true
 8266wifi.espResetPin = <%- template.network.espResetPin %>;
 <% } %>
 <% } %>
-
+<%	if (board.name !== 'biquskr_1.4') { -%>
 <% if (template.network.espRXTX) { %>
 //ESP RX/TX Settings
 8266wifi.serialRxTxPins = { <%- template.network.serialRxPin %>, <%- template.network.serialTxPin %> } ;
 serial.aux.rxTxPins = {NoPin, NoPin};
 <% } %>
-
+<% } %>
+<%	if (board.name === 'biquskr_1.4') { -%>
+<% if (template.network.espRXTX) { %>
+//ESP RX/TX Settings
+8266wifi.serialRxTxPins = { <%- template.network.serialRxPinalt %>, <%- template.network.serialTxPinalt %> } ;
+<% } %>
+<% } %>
+	
 <% if (board.stepperDriverSmart) { %>
 <% if (template.drives[0].stepperDriver === 'TMC220x') { -%>
 //TMC Smart Drivers
