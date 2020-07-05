@@ -67,6 +67,7 @@ adc.prefilter.enable = true
 <% if (template.network.espRXTX) { %>
 //ESP RX/TX Settings
 8266wifi.serialRxTxPins = { <%- template.network.serialRxPin %>, <%- template.network.serialTxPin %> } ;
+serial.aux.rxTxPins = {NoPin, NoPin};
 <% } %>
 
 <% if (board.stepperDriverSmart) { %>
