@@ -63,6 +63,10 @@ M552 S0 ; disable network
 			//has built in drivers, use presets
 			stepperDriver = board.stepperDriver;
 			stepperDriverTimings = board.stepperDriverTimings;
+		} else if (drive.stepperDriver == "TMC220x" || drive.stepperDriver == "TMC222x") {
+			//has built in drivers, use presets
+			stepperDriver = board.stepperDriver;
+			stepperDriverTimings = board.stepperDriverTimings;
 		} else {
 			stepperDriver = drive.stepperDriver;
 			stepperDriverTimings = drive.stepperDriverTimings;
