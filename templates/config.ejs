@@ -32,7 +32,7 @@ M918 P<%- template.display.type %> E<%- template.display.encoder_steps + ((templ
 <%			if (template.network.password !== '') { -%>
 M551 P"<%- template.network.password %>" ; set password
 <%			}
-			if (template.network.hasOwnProperty('mac_address') && template.network.mac_address !== '') { -%>
+			if (template.network.hasOwnProperty('mac_address') && template.network.mac_address !== '' && !board.hasESP) { -%>
 M540 P<%- template.network.mac_address %> ; set custom MAC address
 <%			}
 			if (template.board.startsWith('duetwifi')) { -%>
@@ -63,7 +63,7 @@ M552 S0 ; disable network
 			//has built in drivers, use presets
 			stepperDriver = board.stepperDriver;
 			stepperDriverTimings = board.stepperDriverTimings;
-		} else if (drive.stepperDriver == "TMC220x" || drive.stepperDriver == "TMC222x") {
+		} else if (drive.stepperDriver == "TMC2208" || drive.stepperDriver == "TMC2209" || drive.stepperDriver == "TMC222x") {
 			//has built in drivers, use presets
 			stepperDriver = board.stepperDriver;
 			stepperDriverTimings = board.stepperDriverTimings;

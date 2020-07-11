@@ -61,27 +61,27 @@ adc.prefilter.enable = true
 8266wifi.espDataReadyPin = <%- template.network.espDataReadyPin %>;
 8266wifi.lpcTfrReadyPin = <%- template.network.lpcTfrReadyPin %>;
 8266wifi.espResetPin = <%- template.network.espResetPin %>;
-<% } %>
+	<% } %>
 <% } %>
 <%	if (board.name !== 'biquskr_1.4') { -%>
-<% if (template.network.espRXTX) { %>
+	<% if (template.network.espRXTX) { %>
 //ESP RX/TX Settings
 8266wifi.serialRxTxPins = { <%- template.network.serialRxPin %>, <%- template.network.serialTxPin %> } ;
 serial.aux.rxTxPins = {NoPin, NoPin};
-<% } %>
+	<% } %>
 <% } %>
 <%	if (board.name === 'biquskr_1.4') { -%>
-<% if (template.network.espRXTX) { %>
+	<% if (template.network.espRXTX) { %>
 //ESP RX/TX Settings
 8266wifi.serialRxTxPins = { <%- template.network.serialRxPinalt %>, <%- template.network.serialTxPinalt %> } ;
-<% } %>
+	<% } %>
 <% } %>
 	
 <% if (board.stepperDriverSmart) { %>
-<% if (template.drives[0].stepperDriver === 'TMC220x') { -%>
+	<% if (template.drives[0].stepperDriver === 'TMC2208' || template.drives[0].stepperDriver === 'TMC2209') { -%>
 //TMC Smart Drivers
 stepper.numSmartDrivers = 1; //Adjust to the correct number of smart drivers
-<% } %>
+	<% } %>
 <% } %>
 
 <% if (!template.standalone) { %>
