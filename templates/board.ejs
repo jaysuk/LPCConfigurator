@@ -58,15 +58,15 @@ adc.prefilter.enable = true
 <% if (board.hasESP)  { %>
 	<% if (template.network.enabled) { %>
 //ESP Settings
-8266wifi.espDataReadyPin = <%- template.network.espDataReadyPin %>;
-8266wifi.lpcTfrReadyPin = <%- template.network.lpcTfrReadyPin %>;
-8266wifi.espResetPin = <%- template.network.espResetPin %>;
+8266wifi.espDataReadyPin = <%- board.espDataReadyPin %>;
+8266wifi.lpcTfrReadyPin = <%- board.lpcTfrReadyPin %>;
+8266wifi.espResetPin = <%- board.espResetPin %>;
 	<% } %>
 <% } %>
 <%	if (board.name !== 'biquskr_1.4') { -%>
 	<% if (template.network.espRXTX) { %>
 //ESP RX/TX Settings
-8266wifi.serialRxTxPins = { <%- template.network.serialRxPin %>, <%- template.network.serialTxPin %> } ;
+8266wifi.serialRxTxPins = { <%- board.serialRxPin %>, <%- board.serialTxPin %> } ;
 serial.aux.rxTxPins = {NoPin, NoPin};
 	<% } %>
 <% } %>
