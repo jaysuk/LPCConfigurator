@@ -86,5 +86,5 @@ stepper.numSmartDrivers = 1; //Adjust to the correct number of smart drivers
 
 <% if (!template.standalone) { %>
 //SBC Settings
-sbc.lpcTfrReadyPin = <%- board.lpcTfrReadyPin %>;
+sbc.lpcTfrReadyPin = <%- board.espResetPin %>;
 <% } %>
