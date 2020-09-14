@@ -78,10 +78,14 @@ serial.aux.rxTxPins = {NoPin, NoPin};
 <% } %>
 	
 <% if (board.stepperDriverSmart) { %>
-	<% if (template.drives[0].stepperDriver === 'TMC2208' || template.drives[0].stepperDriver === 'TMC2209') { -%>
-//TMC Smart Drivers
-stepper.numSmartDrivers = 1; //Adjust to the correct number of smart drivers
+	<% let numSmartDrivers = 0; %>
+	<% for (let i = 0; i < template.drives.length; ++i) { %>
+		<% if (template.drives[i].stepperDriver === 'TMC2208' || template.drives[i].stepperDriver === 'TMC2209') { %>
+			<% ++numSmartDrivers; %>
+		<% } else { break; } %>
 	<% } %>
+//TMC Smart Drivers
+stepper.numSmartDrivers = <%- numSmartDrivers %>;
 <% } %>
 
 <% if (!template.standalone) { %>
