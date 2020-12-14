@@ -9,14 +9,14 @@
 //    : Comments can be defined with // or # (comments are not supported inside arrays)
 //    : Each config entry must be all on a single line.
 
-lpc.board = <%- template.board %>; 
+lpc.board = <%- template.board -%>; 
 
 //LED blinks to indicate Platform is spinning or other diagnostic 
 //Comment out or set to NoPin if not wanted.
-leds.diagnostic = <%- board.lpc.diagnosticPin %>; 
+leds.diagnostic = <%- board.lpc.diagnosticPin -%>; 
 
 //Internal SDCard SPI Frequency.
-lpc.internalSDCard.spiFrequencyHz  = <%- board.lpc.internalSDCardSPIFrequencyHz %>;
+lpc.internalSDCard.spiFrequencyHz  = <%- board.lpc.internalSDCardSPIFrequencyHz -%>;
 
 //Only supports 1 External SDCard
 <%- (template.externalSDCard.present)?"":"//" -%>externalSDCard.csPin               = <%- board.lpc.externalSDCard.csPin %>;
@@ -24,22 +24,22 @@ lpc.internalSDCard.spiFrequencyHz  = <%- board.lpc.internalSDCardSPIFrequencyHz 
 <%- (template.externalSDCard.present)?"":"//" -%>lpc.externalSDCard.spiFrequencyHz  = <%- board.lpc.externalSDCard.spiFrequencyHz %>;
 <%- (template.externalSDCard.present)?"":"//" -%>lpc.externalSDCard.spiChannel  = <%- board.lpc.externalSDCard.spiChannel %>;
 
-<% if (template.display.type)  { %>
+<% if (template.display.type)  { -%>
 //LCD Pins (only ST9720 SPI currently supported)
 <% if(board.lpc.lcd.spiChannel == 2) //softwareSPI
 	{ -%>
 //setup the Software SPI Pins for LCD
-lpc.softwareSPI.pins = {<%- util.makePlainArrayString(board.lpc.softwareSPI.pins) %>}; //Set to GPIO pins to use as SCK, MISO, MOSI
+lpc.softwareSPI.pins = {<%- util.makePlainArrayString(board.lpc.softwareSPI.pins) -%>}; //Set to GPIO pins to use as SCK, MISO, MOSI
 <%	} -%>
-lcd.spiChannel =     <%- board.lpc.lcd.spiChannel %>;
-lcd.lcdCSPin =       <%- board.lpc.lcd.lcdCSPin %>;
-lcd.lcdBeepPin =     <%- board.lpc.lcd.lcdBeepPin %>;
-lcd.encoderPinA =    <%- board.lpc.lcd.encoderPinA %>;
-lcd.encoderPinB =    <%- board.lpc.lcd.encoderPinB %>;
-lcd.encoderPinSw =   <%- board.lpc.lcd.encoderPinSw %>; //click
-lcd.lcdDCPin =       <%- board.lpc.lcd.lcdDCPin %>;  //DataControl Pin (A0) if none used set to NoPin
-lcd.panelButtonPin = <%- board.lpc.lcd.panelButtonPin %>; //Extra button on RRD Panel
-<% } %>
+lcd.spiChannel =     <%- board.lpc.lcd.spiChannel -%>;
+lcd.lcdCSPin =       <%- board.lpc.lcd.lcdCSPin -%>;
+lcd.lcdBeepPin =     <%- board.lpc.lcd.lcdBeepPin -%>;
+lcd.encoderPinA =    <%- board.lpc.lcd.encoderPinA -%>;
+lcd.encoderPinB =    <%- board.lpc.lcd.encoderPinB -%>;
+lcd.encoderPinSw =   <%- board.lpc.lcd.encoderPinSw -%>; //click
+lcd.lcdDCPin =       <%- board.lpc.lcd.lcdDCPin -%>;  //DataControl Pin (A0) if none used set to NoPin
+lcd.panelButtonPin = <%- board.lpc.lcd.panelButtonPin -%>; //Extra button on RRD Panel
+<% } -%>
 
 <%
 	let tempSensePins = [];
@@ -49,46 +49,46 @@ lcd.panelButtonPin = <%- board.lpc.lcd.panelButtonPin %>; //Extra button on RRD 
 		tempSensePins.push(template.heaters[i].sensor_pin);	
 	}
 -%>
-heat.tempSensePins = {<%- util.makePlainArrayString(tempSensePins) %>}; //Max of 3 entries
+heat.tempSensePins = {<%- util.makePlainArrayString(tempSensePins) -%>}; //Max of 3 entries
 //heat.spiTempSensorCSPins = { }; //Max of 2 entries
 	 
 //Analogue to Digital prefilter
 adc.prefilter.enable = true
 
-<% if (board.hasESP)  { %>
-	<% if (template.network.enabled) { %>
+<% if (board.hasESP)  { -%>
+	<% if (template.network.enabled) { -%>
 //ESP Settings
-8266wifi.espDataReadyPin = <%- board.espDataReadyPin %>;
-8266wifi.lpcTfrReadyPin = <%- board.lpcTfrReadyPin %>;
-8266wifi.espResetPin = <%- board.espResetPin %>;
-	<% } %>
-<% } %>
+8266wifi.espDataReadyPin = <%- board.espDataReadyPin -%>;
+8266wifi.lpcTfrReadyPin = <%- board.lpcTfrReadyPin -%>;
+8266wifi.espResetPin = <%- board.espResetPin -%>;
+	<% } -%>
+<% } -%>
 <%	if (board.name !== 'biquskr_1.4') { -%>
-	<% if (template.network.espRXTX) { %>
+	<% if (template.network.espRXTX) { -%>
 //ESP RX/TX Settings
-8266wifi.serialRxTxPins = { <%- board.serialRxPin %>, <%- board.serialTxPin %> } ;
+8266wifi.serialRxTxPins = { <%- board.serialRxPin %>, <%- board.serialTxPin -%> } ;
 serial.aux.rxTxPins = {NoPin, NoPin};
-	<% } %>
-<% } %>
+	<% } -%>
+<% } -%>
 <%	if (board.name === 'biquskr_1.4') { -%>
-	<% if (template.network.espRXTX) { %>
+	<% if (template.network.espRXTX) { -%>
 //ESP RX/TX Settings
-8266wifi.serialRxTxPins = { <%- template.network.serialRxPinalt %>, <%- template.network.serialTxPinalt %> } ;
-	<% } %>
-<% } %>
+8266wifi.serialRxTxPins = { <%- template.network.serialRxPinalt -%>, <%- template.network.serialTxPinalt -%> } ;
+	<% } -%>
+<% } -%>
 	
-<% if (board.stepperDriverSmart) { %>
-	<% let numSmartDrivers = 0; %>
-	<% for (let i = 0; i < template.drives.length; ++i) { %>
-		<% if (template.drives[i].stepperDriver === 'TMC2208' || template.drives[i].stepperDriver === 'TMC2209' || template.drives[i].stepperDriver === 'TMC2225' || template.drives[i].stepperDriver === 'TMC2226') { %>
-			<% ++numSmartDrivers; %>
-		<% } else { break; } %>
-	<% } %>
+<% if (board.stepperDriverSmart) { -%>
+	<% let numSmartDrivers = 0; -%>
+	<% for (let i = 0; i < template.drives.length; ++i) { -%>
+		<% if (template.drives[i].stepperDriver === 'TMC2208' || template.drives[i].stepperDriver === 'TMC2209' || template.drives[i].stepperDriver === 'TMC2225' || template.drives[i].stepperDriver === 'TMC2226') { -%>
+			<% ++numSmartDrivers; -%>
+		<% } else { break; } -%>
+	<% } -%>
 //TMC Smart Drivers
-stepper.numSmartDrivers = <%- numSmartDrivers %>;
-<% } %>
+stepper.numSmartDrivers = <%- numSmartDrivers -%>;
+<% } -%>
 
-<% if (!template.standalone) { %>
+<% if (!template.standalone) { -%>
 //SBC Settings
-sbc.lpcTfrReadyPin = <%- board.espResetPin %>;
-<% } %>
+sbc.lpcTfrReadyPin = <%- board.espResetPin -%>;
+<% } -%>
