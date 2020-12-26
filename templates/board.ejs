@@ -63,6 +63,9 @@ adc.prefilter.enable = true
 8266wifi.espResetPin = <%- board.espResetPin -%>;
 	<% } -%>
 <% } -%>
+<%	if (board.name == 'fly_F407ZG' && board.hasESP && template.network.enabled) { -%>
+8266wifi.csPin = F.11	
+<% } -%>
 <%	if (board.name !== 'biquskr_1.4') { -%>
 	<% if (template.network.espRXTX) { -%>
 //ESP RX/TX Settings
@@ -76,7 +79,6 @@ serial.aux.rxTxPins = {NoPin, NoPin};
 8266wifi.serialRxTxPins = { <%- template.network.serialRxPinalt -%>, <%- template.network.serialTxPinalt -%> } ;
 	<% } -%>
 <% } -%>
-	
 <% if (board.stepperDriverSmart) { -%>
 	<% let numSmartDrivers = 0; -%>
 	<% for (let i = 0; i < template.drives.length; ++i) { -%>
@@ -87,8 +89,15 @@ serial.aux.rxTxPins = {NoPin, NoPin};
 //TMC Smart Drivers
 stepper.numSmartDrivers = <%- numSmartDrivers -%>;
 <% } -%>
-
 <% if (!template.standalone) { -%>
 //SBC Settings
 sbc.lpcTfrReadyPin = <%- board.espResetPin -%>;
+<%	if (board.name === 'fly_F407ZG') { -%>
+sbc.csPin = F.11
+<% } -%>
+<% } -%>
+<% if (template.panelDue && board.name === 'biqugtr_1.0') { -%>
+
+// External Display settings
+serial.aux.rxTxPins = {PD_9, PD_8};
 <% } -%>
