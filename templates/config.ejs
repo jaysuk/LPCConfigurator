@@ -371,10 +371,16 @@ M567 P<%- tool.number %> E<%- tool.mix_ratio.join(':') %> ; set mixing ratios fo
 
 ; Custom settings are not defined
 <%	}
-	if (template.panelDue || template.nvram || template.auto_save.enabled || template.generate_t_code && template.tools.length > 0) { -%>
+	if (template.panelDue || template.tft || template.flyscreen || template.nvram || template.auto_save.enabled || template.generate_t_code && template.tools.length > 0) { -%>
 
 ; Miscellaneous
-<%		if (template.panelDue) { -%>
+<%		if (template.flyscreen) { -%>
+	M575 P1 S0 B56700 ; enable support for Flymaker 4.3/7" screen
+<%		}
+		if (template.tft) { -%>
+	M575 P1 S1 B115200 ; enable support for tft
+<%		}
+		if (template.panelDue) { -%>
 M575 P1 S1 B57600 ; enable support for PanelDue
 <%		}
 		if (template.nvram) { -%>

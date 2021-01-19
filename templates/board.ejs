@@ -15,15 +15,6 @@ lpc.board = <%- template.board -%>;
 //Comment out or set to NoPin if not wanted.
 leds.diagnostic = <%- board.lpc.diagnosticPin -%>; 
 
-//Internal SDCard SPI Frequency.
-lpc.internalSDCard.spiFrequencyHz  = <%- board.lpc.internalSDCardSPIFrequencyHz -%>;
-
-//Only supports 1 External SDCard
-<%- (template.externalSDCard.present)?"":"//" -%>externalSDCard.csPin               = <%- board.lpc.externalSDCard.csPin %>;
-<%- (template.externalSDCard.present)?"":"//" -%>externalSDCard.cardDetectPin       = <%- board.lpc.externalSDCard.cardDetectPin %>;
-<%- (template.externalSDCard.present)?"":"//" -%>lpc.externalSDCard.spiFrequencyHz  = <%- board.lpc.externalSDCard.spiFrequencyHz %>;
-<%- (template.externalSDCard.present)?"":"//" -%>lpc.externalSDCard.spiChannel  = <%- board.lpc.externalSDCard.spiChannel %>;
-
 <% if (template.display.type)  { -%>
 //LCD Pins (only ST9720 SPI currently supported)
 <% if(board.lpc.lcd.spiChannel == 2) //softwareSPI
@@ -51,9 +42,6 @@ lcd.panelButtonPin = <%- board.lpc.lcd.panelButtonPin -%>; //Extra button on RRD
 -%>
 heat.tempSensePins = {<%- util.makePlainArrayString(tempSensePins) -%>}; //Max of 3 entries
 //heat.spiTempSensorCSPins = { }; //Max of 2 entries
-	 
-//Analogue to Digital prefilter
-adc.prefilter.enable = true
 
 <% if (board.hasESP)  { -%>
 	<% if (template.network.enabled) { -%>
@@ -64,7 +52,7 @@ adc.prefilter.enable = true
 	<% } -%>
 <% } -%>
 <%	if (board.name == 'fly_F407ZG' && board.hasESP && template.network.enabled) { -%>
-8266wifi.csPin = F.11	
+8266wifi.csPin = <%- board.wifi8266CSPin -%>;	
 <% } -%>
 <%	if (board.name !== 'biquskr_1.4') { -%>
 	<% if (template.network.espRXTX) { -%>
@@ -96,8 +84,8 @@ sbc.lpcTfrReadyPin = <%- board.espResetPin -%>;
 sbc.csPin = F.11
 <% } -%>
 <% } -%>
-<% if (template.panelDue && board.name === 'biqugtr_1.0') { -%>
+<% if (template.panelDue || template.tft || template.flyscreen) { -%>
 
 // External Display settings
-serial.aux.rxTxPins = {PD_9, PD_8};
+serial.aux.rxTxPins = {<%- board.auxRX %>, <%- board.auxTX %>};
 <% } -%>
